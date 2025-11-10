@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/font/Montserrat-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/font/Montserrat-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/font/Montserrat-Regular.ttf");
+  font-weight: 400;
+}
+
+/* Initial Default Styling */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #1B5633;
+  scrollbar-width: none !important;
+}
+
+body {
+  font-weight: 400;
+  overflow-x: hidden;
+  position: relative;
+  color: #CEB888 !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  display: none;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none !important;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+  border-radius: 10%;
+  background: rgba(52, 58, 64, 0.5);
+  line-height: 45px;
+  transition: background 0.1s ease-in-out;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.scroll-to-top:hover {
+  background: rgba(52, 58, 64, 0.8);
+}
+
+.scroll-to-top.show {
+  display: inline; /* Show the button when 'show' class is applied */
+}
+
+/* AI chat styles removed */

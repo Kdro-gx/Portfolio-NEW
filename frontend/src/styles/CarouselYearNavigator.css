@@ -1,0 +1,346 @@
+/* Carousel Year Navigator Styles */
+.carousel-year-navigator {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto 3rem auto;
+  padding: 0 3rem;
+}
+
+/* Navigation Buttons */
+.carousel-nav-btn {
+  display: none;
+  /* Hide arrow buttons */
+}
+
+.carousel-nav-btn:hover {
+  border-color: #F4811F;
+  background: rgba(244, 129, 31, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(244, 129, 31, 0.4);
+}
+
+.carousel-nav-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.carousel-nav-btn:hover svg {
+  transform: scale(1.2);
+}
+
+/* Carousel Track */
+.carousel-track {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* Year Cards */
+.carousel-year-card {
+  position: absolute;
+  width: 140px;
+  height: 180px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: -11px -11px 0px 3px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+/* Card positioning based on offset */
+.carousel-year-card.offset--2 {
+  left: -280px;
+  transform: scale(0.7) translateY(20px);
+  opacity: 1;
+  z-index: 1;
+  filter: blur(2px);
+}
+
+.carousel-year-card.offset--1 {
+  left: -150px;
+  transform: scale(0.85) translateY(10px);
+  opacity: 1;
+  z-index: 2;
+}
+
+.carousel-year-card.offset-0 {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  z-index: 3;
+  border-color: #F4811F;
+}
+
+.carousel-year-card.offset-1 {
+  right: -150px;
+  transform: scale(0.85) translateY(10px);
+  opacity: 1;
+  z-index: 2;
+}
+
+.carousel-year-card.offset-2 {
+  right: -280px;
+  transform: scale(0.7) translateY(20px);
+  opacity: 1;
+  z-index: 1;
+  filter: blur(2px);
+}
+
+/* Active card special effects */
+.carousel-year-card.active {
+  border-width: 3px;
+}
+
+.carousel-year-card.active::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #782F40, #F4811F, #008344);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.7;
+  animation: rotateBorder 3s linear infinite;
+}
+
+@keyframes rotateBorder {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Year Card Content */
+.year-card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.carousel-year-card:hover .year-card-content {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.year-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #edeeef;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.carousel-year-card.active .year-number {
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #F4811F, #edeeef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Active Indicator */
+.active-indicator {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #F4811F;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.active-indicator svg {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Year Counter */
+.year-counter {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(237, 238, 239, 0.8);
+}
+
+.current-position {
+  color: #F4811F;
+  font-size: 1.5rem;
+}
+
+.separator {
+  color: rgba(237, 238, 239, 0.5);
+}
+
+.total-years {
+  color: rgba(237, 238, 239, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .carousel-year-navigator {
+    height: 130px;
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+
+  .carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .carousel-year-card {
+    width: 110px;
+    height: 120px;
+  }
+
+  .carousel-year-card.offset--2 {
+    left: -220px;
+  }
+
+  .carousel-year-card.offset--1 {
+    left: -120px;
+  }
+
+  .carousel-year-card.offset-1 {
+    right: -120px;
+  }
+
+  .carousel-year-card.offset-2 {
+    right: -220px;
+  }
+
+  .year-number {
+    font-size: 1.5rem;
+  }
+
+  .carousel-year-card.active .year-number {
+    font-size: 2rem;
+  }
+
+  .year-counter {
+    bottom: -35px;
+    font-size: 1rem;
+  }
+
+  .current-position {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-year-navigator {
+    height: 140px;
+    padding: 0 1.5rem;
+  }
+
+  .carousel-nav-btn {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
+  }
+
+  .carousel-year-card {
+    width: 90px;
+    height: 120px;
+  }
+
+  .carousel-year-card.offset--2 {
+    left: -180px;
+  }
+
+  .carousel-year-card.offset--1 {
+    left: -100px;
+  }
+
+  .carousel-year-card.offset-1 {
+    right: -100px;
+  }
+
+  .carousel-year-card.offset-2 {
+    right: -180px;
+  }
+
+  .year-number {
+    font-size: 1.3rem;
+  }
+
+  .carousel-year-card.active .year-number {
+    font-size: 1.8rem;
+  }
+
+  .active-indicator svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Glassmorphism Effects */
+.carousel-year-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-year-card:hover::after {
+  opacity: 0.8;
+}
+
+/* Smooth transitions for all card movements */
+.carousel-year-card * {
+  transition: inherit;
+}

@@ -1,0 +1,500 @@
+/* Canvas Timeline View Styles */
+.canvas-timeline-view {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 600px;
+  background: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: grab;
+  border: 2px solid rgba(244, 129, 31, 0.3);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Inactive state - glowing animated border */
+.canvas-timeline-view.inactive {
+  border: 3px solid rgba(244, 129, 31, 0.8);
+  box-shadow: 0 0 20px rgba(244, 129, 31, 0.5), inset 0 0 20px rgba(244, 129, 31, 0.2);
+  animation: glowBorder 2s ease-in-out infinite;
+}
+
+@keyframes glowBorder {
+  0%, 100% {
+    border-color: rgba(244, 129, 31, 0.8);
+    box-shadow: 0 0 20px rgba(244, 129, 31, 0.5), inset 0 0 20px rgba(244, 129, 31, 0.2);
+  }
+  50% {
+    border-color: rgba(244, 129, 31, 1);
+    box-shadow: 0 0 30px rgba(244, 129, 31, 0.8), inset 0 0 30px rgba(244, 129, 31, 0.3);
+  }
+}
+
+.canvas-timeline-view:active {
+  cursor: grabbing;
+}
+
+/* Canvas Viewport */
+.canvas-viewport {
+  position: relative;
+  width: 2500px;
+  height: 2000px;
+  transition: transform 0.1s ease-out;
+}
+
+/* Grid Background - Hidden on Main Page */
+.canvas-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Connections SVG */
+.canvas-connections-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Animated Connection Lines */
+.canvas-connection-path {
+  stroke-width: 5;
+  fill: none;
+  stroke: url(#connectionGradient);
+  filter: drop-shadow(0 0 8px rgba(244, 129, 31, 0.6));
+}
+
+/* Gradient Animation */
+@keyframes rotateGradient {
+  0% {
+    stop-color: #782F40;
+  }
+  33% {
+    stop-color: #F4811F;
+  }
+  66% {
+    stop-color: #008344;
+  }
+  100% {
+    stop-color: #782F40;
+  }
+}
+
+/* Timeline Cards on Canvas */
+.canvas-timeline-card {
+  position: absolute;
+  width: 280px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.canvas-timeline-card:hover {
+  border-color: rgba(244, 129, 31, 0.5);
+  box-shadow: 0 8px 25px rgba(244, 129, 31, 0.3);
+  transform: scale(1.02);
+}
+
+/* Card Header */
+.canvas-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.canvas-quarter {
+  background: linear-gradient(45deg, #782F40, #F4811F);
+  color: #edeeef;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.canvas-category {
+  color: rgba(237, 238, 239, 0.7);
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+/* Event Node */
+.canvas-event-node {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-event-icon {
+  font-size: 1.8rem;
+}
+
+/* Card Content */
+.canvas-event-title {
+  color: #edeeef;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.canvas-event-description {
+  color: rgba(237, 238, 239, 0.7);
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Card Footer */
+.canvas-event-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.canvas-year {
+  color: #F4811F;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Connection Indicator */
+.canvas-connection-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  background: rgba(244, 129, 31, 0.2);
+  border: 1px solid rgba(244, 129, 31, 0.3);
+  border-radius: 8px;
+  font-size: 0.7rem;
+  color: #F4811F;
+}
+
+.canvas-connection-indicator .connection-count {
+  font-weight: 600;
+}
+
+/* Activation Overlay - Hidden, using border glow instead */
+.canvas-activation-overlay {
+  display: none;
+}
+
+.canvas-activation-message {
+  text-align: center;
+  color: #edeeef;
+  padding: 2rem;
+  background: rgba(20, 20, 20, 0.9);
+  border: 2px solid rgba(244, 129, 31, 0.5);
+  border-radius: 15px;
+  max-width: 300px;
+}
+
+.activation-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.canvas-activation-message p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #F4811F;
+}
+
+/* Zoom Indicator */
+.canvas-zoom-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 0.5rem 1rem;
+  background: rgba(20, 20, 20, 0.9);
+  border: 2px solid rgba(244, 129, 31, 0.5);
+  border-radius: 10px;
+  color: #F4811F;
+  font-weight: 600;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Inline Recenter Button (inside instructions bar) */
+.canvas-recenter-button-inline {
+  padding: 0.4rem 0.8rem;
+  background: rgba(244, 129, 31, 0.9);
+  border: 1px solid rgba(244, 129, 31, 1);
+  border-radius: 8px;
+  color: #edeeef;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  margin-left: 0.8rem;
+}
+
+.canvas-recenter-button-inline:hover {
+  background: rgba(244, 129, 31, 1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(244, 129, 31, 0.5);
+}
+
+.canvas-recenter-button-inline:active {
+  transform: scale(0.95);
+}
+
+/* Inline Unfocus Button (inside instructions bar) */
+.canvas-unfocus-button-inline {
+  padding: 0.4rem 0.8rem;
+  background: rgba(120, 47, 64, 0.9);
+  border: 1px solid rgba(120, 47, 64, 1);
+  border-radius: 8px;
+  color: #edeeef;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  margin-left: 0.5rem;
+}
+
+.canvas-unfocus-button-inline:hover {
+  background: rgba(120, 47, 64, 1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(120, 47, 64, 0.5);
+}
+
+.canvas-unfocus-button-inline:active {
+  transform: scale(0.95);
+}
+
+.unfocus-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.unfocus-text {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.recenter-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.recenter-text {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+/* Instructions */
+.canvas-instructions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.5rem 1rem;
+  background: rgba(20, 20, 20, 0.9);
+  border: 2px solid rgba(244, 129, 31, 0.5);
+  border-radius: 10px;
+  color: rgba(237, 238, 239, 0.8);
+  font-size: 0.85rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.canvas-instructions > span {
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .canvas-timeline-view {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .canvas-timeline-card {
+    width: 220px;
+    padding: 0.8rem;
+  }
+
+  .canvas-event-node {
+    width: 50px;
+    height: 50px;
+  }
+
+  .canvas-event-icon {
+    font-size: 1.5rem;
+  }
+
+  .canvas-event-title {
+    font-size: 0.9rem;
+  }
+
+  .canvas-event-description {
+    font-size: 0.75rem;
+  }
+
+  .canvas-activation-message {
+    max-width: 250px;
+    padding: 1.5rem;
+  }
+
+  .activation-icon {
+    font-size: 2.5rem;
+  }
+
+  .canvas-activation-message p {
+    font-size: 0.95rem;
+  }
+
+  .canvas-instructions {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .canvas-zoom-indicator {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .canvas-recenter-button-inline {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+  }
+
+  .canvas-unfocus-button-inline {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    margin-left: 0.4rem;
+  }
+
+  .recenter-icon {
+    font-size: 0.9rem;
+  }
+
+  .recenter-text {
+    font-size: 0.75rem;
+  }
+
+  .unfocus-icon {
+    font-size: 0.85rem;
+  }
+
+  .unfocus-text {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .canvas-timeline-view {
+    height: 50vh;
+    min-height: 350px;
+  }
+
+  .canvas-timeline-card {
+    width: 180px;
+    padding: 0.6rem;
+  }
+
+  .canvas-event-node {
+    width: 40px;
+    height: 40px;
+  }
+
+  .canvas-event-icon {
+    font-size: 1.2rem;
+  }
+
+  .canvas-activation-message {
+    max-width: 200px;
+    padding: 1rem;
+  }
+
+  .activation-icon {
+    font-size: 2rem;
+  }
+
+  .canvas-activation-message p {
+    font-size: 0.85rem;
+  }
+
+  .canvas-instructions {
+    display: none;
+  }
+
+  .canvas-zoom-indicator {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    bottom: 15px;
+    left: 15px;
+  }
+}
+
+/* Glassmorphism Effects */
+.canvas-timeline-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  border-radius: 15px;
+}
+
+.canvas-timeline-card:hover::after {
+  opacity: 0.8;
+}

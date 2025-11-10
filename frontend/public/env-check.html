@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1F222E;
+            color: white;
+        }
+        .status {
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #2a2d3a;
+        }
+        .error { color: #ff6b6b; }
+        .success { color: #51cf66; }
+        pre {
+            background: #1a1d28;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Environment Diagnostics</h1>
+    <div class="status">
+        <h2>Expected Configuration:</h2>
+        <pre>REACT_APP_API_URI=https://portfolio-new-vk8b.onrender.com/api</pre>
+    </div>
+    <div class="status">
+        <h2>Testing Backend Connection:</h2>
+        <p id="backend-status">Testing...</p>
+        <pre id="backend-response"></pre>
+    </div>
+    <div class="status">
+        <h2>Testing Must-Load Images:</h2>
+        <p id="images-status">Testing...</p>
+        <pre id="images-response"></pre>
+    </div>
+
+    <script>
+        const API_URI = 'https://portfolio-new-vk8b.onrender.com/api';
+
+        // Test backend ping
+        fetch(`${API_URI}/ping`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('backend-status').innerHTML = '<span class="success">✅ Backend Connected</span>';
+                document.getElementById('backend-response').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(err => {
+                document.getElementById('backend-status').innerHTML = '<span class="error">❌ Backend Connection Failed</span>';
+                document.getElementById('backend-response').textContent = err.toString();
+            });
+
+        // Test must-load images
+        fetch(`${API_URI}/must-load-images`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('images-status').innerHTML = '<span class="success">✅ Must-Load Images Retrieved</span>';
+                document.getElementById('images-response').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(err => {
+                document.getElementById('images-status').innerHTML = '<span class="error">❌ Must-Load Images Failed</span>';
+                document.getElementById('images-response').textContent = err.toString();
+            });
+    </script>
+</body>
+</html>

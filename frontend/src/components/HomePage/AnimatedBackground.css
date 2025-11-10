@@ -1,0 +1,115 @@
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    #000000 0%,
+    #1a1a1a 25%,
+    #0f0f0f 50%,
+    #1a1a1a 75%,
+    #000000 100%
+  );
+  pointer-events: none;
+}
+
+.falling-icon {
+  position: absolute;
+  top: -150px;
+  animation: fall 12s linear infinite;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  will-change: transform, opacity;
+}
+
+.falling-icon img {
+  filter: brightness(0.8) contrast(1.1);
+  transition: transform 0.3s ease;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-150px) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: var(--icon-opacity, 0.4);
+  }
+  /* Full visibility until AI companion box level (around 50-55% down the page) */
+  50% {
+    opacity: var(--icon-opacity, 0.4);
+    transform: translateY(calc(50vh)) rotate(360deg);
+  }
+  /* Start fading at AI companion box level */
+  65% {
+    opacity: calc(var(--icon-opacity, 0.4) * 0.7);
+    transform: translateY(calc(65vh)) rotate(480deg);
+  }
+  /* Nearly invisible at Enter Portfolio button level */
+  75% {
+    opacity: calc(var(--icon-opacity, 0.4) * 0.2);
+    transform: translateY(calc(75vh)) rotate(600deg);
+  }
+  /* Completely invisible and continue moving to invisible barrier */
+  85% {
+    opacity: 0;
+    transform: translateY(calc(85vh)) rotate(650deg);
+  }
+  /* Invisible barrier at 90vh - icons get removed here by JavaScript */
+  90% {
+    transform: translateY(calc(90vh)) rotate(680deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(calc(120vh)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Hover effects for a bit more interactivity */
+.falling-icon:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.2) contrast(1.3);
+}
+
+/* Consistent linear movement for all icons - same speed */
+.falling-icon {
+  animation-timing-function: linear;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .falling-icon {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .falling-icon {
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+/* Custom opacity for each icon type */
+.falling-icon[data-icon="boxing"] img {
+  filter: brightness(0.9) contrast(1.2) hue-rotate(10deg);
+}
+
+.falling-icon[data-icon="famu"] img {
+  filter: brightness(0.8) contrast(1.1) hue-rotate(-10deg);
+}
+
+.falling-icon[data-icon="fsu"] img {
+  filter: brightness(0.85) contrast(1.15) hue-rotate(15deg);
+}
+
+.falling-icon[data-icon="famu-fsu"] img {
+  filter: brightness(0.9) contrast(1.2);
+}
