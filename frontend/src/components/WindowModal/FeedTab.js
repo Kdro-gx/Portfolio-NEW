@@ -88,8 +88,7 @@ const FeedTab = () => {
       <div className="feed-tab" ref={containerRef}>
         {/* <h1 className="feed-warning">Under Construction!</h1> */}
         <p className="feed-tab-description">
-          Welcome to your personalized Feed Tab, follow the latest updates and
-          transformative moments.
+          Personalized Feed Tab Currently Under Construction
         </p>
 
         <div className="feed-items">
